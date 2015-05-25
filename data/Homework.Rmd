@@ -142,7 +142,7 @@ your data that includes the relevant means and standard errors.-->
  summary(aov(optimismscore~party*sex,data=politics[politics$testtime=="post",]))
 ```
 
-I used a 2-way between-subjects ANOVA to seef if party affliliation and sex predict posttest optimism scores independently or in an interaction.
+I used a 2-way between-subjects ANOVA to seef if party affliliation and sex predict posttest optimism scores independently or in an interaction. The p-values for sex           0.843 and party:sex 0.304 do not tell me much in particular.  Maybe there's nothing going on, or maybe I just can't see it. The super tiny P- value for Party 4.2e-09 is definitely something. The two party columns have meaningfully different averages.
 
 
 ```{r}
@@ -179,7 +179,7 @@ f<-ggplot(temp, aes(x=party, y=means, fill=sex))+
 f
 ```
 
-
+I created a plot via gplots library.
 
 
 
@@ -218,6 +218,8 @@ f<-ggplot(temp, aes(x=party, y=means, group=sex, color=sex))+
 f
 ```
 
+I created a line graph for the same data with error bars.
+
 
 
 <!-- Run a test to see if optimism scores pre- and post
@@ -227,7 +229,11 @@ watching videos depends on sex.-->
 summary(aov(optimismscore~testtime*sex+Error(subject/testtime),data=politics))
 ```
 
-
+To see if optimism scores before and after watching videos vary depending on sex, I ran a
+2-way mixed ANOVA. I used a mixed ANOVA because the same
+people indicated their optimism before and after the videos
+(i.e. a within-subjects factor) and because there are different genders affiliated with different optimism scores (i.e.a between-subjects factor). 
+The testtime p-value is 1.87e-08. Since the testtime groups have different averages, it indicates that optimism scores varied. 
 
 <!-- Run a Multiple Regression Analysis to see
 whether you can predict someones posttest optimism
@@ -242,8 +248,8 @@ analyses-->
 summary(lm(optimismscore~politics$optimismscore[politics$testtime=="pre"]+party,data=politics[politics$testtime=="post",]))```
 
 I used Multiple Regression to predict posttime optimism scores from pretest optimism scores and party affiliation.
+The Multiple R-squared=0.90, F-statistic=180.3 on 3 and 62 DF, and the p-value= 2.2e-16 indicate a lack of significance. 
 
-I will also run a regression using sex instead of party, so that I can find intercepts and create the plot as instructed below.
 
 ```{r}
 summary(lm(optimismscore~OptScorePre+sex,data=politics[politics$testtime=="post",]))
@@ -276,4 +282,6 @@ f<-ggplot(politics[politics$testtime=="post",],aes(x=OptScorePre,y=optimismscore
 f
 ```
 
+I ran a regression using sex instead of party, so that I can find intercepts and create the plot as instructed. I created a scatter plot. The Multiple R-squared=0.90, F-statistic=269.6 on 2 and 63 DF, and the p-value= 2.2e-16 indicate a lack of significance. 
 
+***Fin***
