@@ -1,3 +1,6 @@
+---
+output: pdf_document
+---
 #440 Reproducibility and Statistics Assignment Homework
 
 <!-- This is an Rmd comment. -->
@@ -41,7 +44,9 @@ I looked at the data.
 
 I changed subject into a factor variable.
   
-```{r}politics$testtime<-factor(politics$testtime, levels=c("pre", "post"))```
+```{r}
+politics$testtime<-factor(politics$testtime, levels=c("pre", "post"))
+```
 
 I refactored the variables "pre" and "post" so that "pre" precedes "post".
 
